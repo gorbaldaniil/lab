@@ -1,4 +1,5 @@
 def number_of_letters(user_string):
+    result1 = []
     i=0
     b=""
     for letter in user_string:
@@ -15,6 +16,16 @@ def number_of_letters(user_string):
             print(x,'=',i)
             i = 0
             f = None
+
+    for word in user_string.split():
+        if word not in result1:
+            result1.append(word)
+
+    userWords = result1
+    userWords.sort()
+    result = " ".join(userWords)
+
+    print(result)
 
 
 user_string = input("Enter: ")
