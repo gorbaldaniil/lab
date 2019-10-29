@@ -5,15 +5,19 @@ i = -1
 result = ""
 
 for num in text.split():
-
+    i += 1
     if num.isdigit():
         num = str(int(num) + key)
         inputWords = text.split()
         inputWords[i] = num
         result += ''.join(num)
-        result += ' '
+        try:
+            test = text.split()[i+1]
+            result += " "
+        except:
+            pass
         continue
-    i += 1
+
     for letters in num:
         ordValue = ord(letters)
         cipherValue = ordValue + key
@@ -32,6 +36,10 @@ for num in text.split():
             cipherValue = (ordValue - 1071 + 1)% 26 + 1071
 
         result += chr(cipherValue)
-    result += ' '
 
+    try:
+        test = text.split()[i+1]
+        result += " "
+    except:
+        pass
 print(result)
