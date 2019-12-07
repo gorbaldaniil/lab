@@ -1,5 +1,6 @@
 import socket, threading, time
 
+
 def caesars(text, key):
     i = -1
     result = ""
@@ -47,10 +48,12 @@ def caesars(text, key):
 
     return result
 
+
 key = 1
 shutdown = False
 join = False
 
+decode = input("Розшифровувати повідомлення?(y or n)")
 
 def receving(name, sock):
     while not shutdown:
@@ -60,14 +63,36 @@ def receving(name, sock):
 
                 decrypt = "";
                 k = False
-                for i in data.decode("utf-8"):
-                    if i == ":":
-                        k = True
-                        decrypt += i
-                    elif k == False or i == " ":
-                        decrypt += i
-                    else:
-                        decrypt += caesars(i, -key)
+
+                if decode == "y":
+                    for i in data.decode("utf-8"):
+                        if i == ":":
+                            k = True
+                            decrypt += i
+                        elif k == False or i == " ":
+                            decrypt += i
+                        else:
+                            decrypt += caesars(i, -key)
+                else:
+                    for i in data.decode("utf-8"):
+                        if i == ":":
+                            k = True
+                            decrypt += i
+                        elif k == False or i == " ":
+                            decrypt += i
+                        else:
+                            decrypt += i
+
+                # for i in data.decode("utf-8"):
+                #     if i == ":":
+                #         k = True
+                #         decrypt += i
+                #     elif k == False or i == " ":
+                #         decrypt += i
+                #     else:
+                #         decrypt += caesars(i, -key)
+
+
                 print(decrypt)
                 # End
 
@@ -79,7 +104,7 @@ def receving(name, sock):
 host = socket.gethostbyname(socket.gethostname())
 port = 0
 
-server = ("192.168.0.103", 9090)
+server = (socket.gethostbyname(socket.gethostname()), 4040)
 
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.bind((host, port))
